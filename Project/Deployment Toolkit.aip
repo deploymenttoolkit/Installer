@@ -17,10 +17,10 @@
     <ROW Property="ARPURLINFOABOUT" Value="https://github.com/deploymenttoolkit/Deployment/wiki"/>
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/deploymenttoolkit/Deployment/releases"/>
     <ROW Property="Manufacturer" Value="DeploymentToolkit Team"/>
-    <ROW Property="ProductCode" Value="2057:{02CDFBFD-2EA0-4D02-8C2D-15F85A0C71AB} " Type="16"/>
+    <ROW Property="ProductCode" Value="2057:{6EA2762F-3A4B-4E09-9E1B-4FBE83801CBE} " Type="16"/>
     <ROW Property="ProductLanguage" Value="2057"/>
     <ROW Property="ProductName" Value="DeploymentToolkit"/>
-    <ROW Property="ProductVersion" Value="1.0.7110.29283" Type="32" TargetFile="DeploymentToolkit.Deployment.exe"/>
+    <ROW Property="ProductVersion" Value="1.0.7110.29724" Type="32" TargetFile="DeploymentToolkit.Deployment.exe"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{0A9621FB-8122-4AA0-AC8E-CA2224B3A487}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -34,8 +34,11 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="CommonAppDataFolder" Directory_Parent="TARGETDIR" DefaultDir="COMMON~1|CommonAppDataFolder" IsPseudoRoot="1"/>
     <ROW Directory="Config_Dir" Directory_Parent="APPDIR" DefaultDir="Config"/>
     <ROW Directory="Languages_Dir" Directory_Parent="APPDIR" DefaultDir="LANGUA~1|Languages"/>
+    <ROW Directory="Logs_Dir" Directory_Parent="NewFolder_Dir" DefaultDir="Logs" DirectoryOptions="12"/>
+    <ROW Directory="NewFolder_Dir" Directory_Parent="CommonAppDataFolder" DefaultDir="DEPLOY~1|DeploymentToolkit"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
@@ -62,6 +65,7 @@
     <ROW Component="DeploymentToolkit.Uninstaller.MSI.dll" ComponentId="{39F86630-E750-4ECC-9CCF-E0667B2E3B0A}" Directory_="APPDIR" Attributes="0" KeyPath="DeploymentToolkit.Uninstaller.MSI.dll"/>
     <ROW Component="DeploymentToolkit.Uninstaller.dll" ComponentId="{6B0B8137-9F9D-4AE4-9BCA-6BE0419A597A}" Directory_="APPDIR" Attributes="0" KeyPath="DeploymentToolkit.Uninstaller.dll"/>
     <ROW Component="DeploymentToolkit.Util.dll" ComponentId="{D85A3D3B-0A12-4960-B1AF-6FD1EF970D7E}" Directory_="APPDIR" Attributes="0" KeyPath="DeploymentToolkit.Util.dll"/>
+    <ROW Component="Logs" ComponentId="{37B75BE7-2F80-4855-AE52-2EEC182C5679}" Directory_="Logs_Dir" Attributes="0"/>
     <ROW Component="Microsoft.Deployment.WindowsInstaller.dll" ComponentId="{7A68A68F-2013-40D2-849C-7BDBBA54E09F}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Deployment.WindowsInstaller.dll"/>
     <ROW Component="NLog.dll" ComponentId="{4B9BDB69-680F-4E66-831C-E16C3EF6E8E0}" Directory_="APPDIR" Attributes="0" KeyPath="NLog.dll"/>
     <ROW Component="Newtonsoft.Json.dll" ComponentId="{91708F8F-1037-4CAE-A75B-B3B2EEE5A7A0}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
@@ -222,6 +226,9 @@
     <ROW Dialog_="PrerequisitesDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
     <ROW Dialog_="PrerequisitesDlg" Control_="Back" Event="NewDialog" Argument="WelcomePrereqDlg" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
   </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
+    <ROW Directory_="Logs_Dir" Component_="Logs" ManualDelete="false"/>
+  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_AppSearchEx" Type="1" Source="Prereq.dll" Target="DoAppSearchEx"/>
     <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH_ORIGINAL" Target="[AI_SETUPEXEPATH]"/>
@@ -234,6 +241,7 @@
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
     <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
     <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_ResolveLocalizedCredentials" Type="1" Source="aicustact.dll" Target="GetLocalizedCredentials"/>
     <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
     <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
     <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]" MultiBuildTarget="DefaultBuild:[ProgramFilesFolder][ProductName]"/>
@@ -273,6 +281,7 @@
     <ROW Feature_="MainFeature" Component_="Blocker.config"/>
     <ROW Feature_="MainFeature" Component_="UI_Messages_AR.xml"/>
     <ROW Feature_="MainFeature" Component_="DeploymentToolkit.Actions.dll"/>
+    <ROW Feature_="MainFeature" Component_="Logs"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="Logo.exe" SourcePath="..\Logo.ico" Index="0"/>
@@ -282,20 +291,22 @@
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
     <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
     <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
-    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
-    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="52"/>
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
     <ROW Action="AI_AppSearchEx" Sequence="102"/>
+    <ROW Action="AI_ResolveLocalizedCredentials" Sequence="51"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
-    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
-    <ROW Action="AI_DpiContentScale" Sequence="52"/>
-    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="54"/>
+    <ROW Action="AI_DpiContentScale" Sequence="53"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="52"/>
     <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99"/>
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="103"/>
     <ROW Action="AI_AppSearchEx" Sequence="102"/>
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
+    <ROW Action="AI_ResolveLocalizedCredentials" Sequence="51"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
     <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] can not be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
@@ -303,6 +314,11 @@
     <ROW Condition="(VersionNT64 OR ((VersionNT &lt;&gt; 501) OR (ServicePackLevel = 3))) AND ((VersionNT &lt;&gt; 502) OR (ServicePackLevel = 2))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="AI_DETECTED_DOTNET_VERSION &gt;= AI_REQUIRED_DOTNET_VERSION" Description="[ProductName] can not be installed on systems with .NET Framework version lower than [AI_REQUIRED_DOTNET_DISPLAY]." DescriptionLocId="AI.LaunchCondition.DotNET" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="VersionNT" Description="[ProductName] can not be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLockPermComponent">
+    <ROW LockObject="Logs_Dir" Table="CreateFolder" User="[GRP_ADMINISTRATORS]" Permission="1880096767" Flags="0"/>
+    <ROW LockObject="Logs_Dir" Table="CreateFolder" User="[GRP_USERS]" Permission="1880096767" Flags="0"/>
+    <ROW LockObject="Logs_Dir" Table="CreateFolder" User="SYSTEM" Permission="1880096767" Flags="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
     <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
