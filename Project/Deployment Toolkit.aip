@@ -17,10 +17,10 @@
     <ROW Property="ARPURLINFOABOUT" Value="https://github.com/deploymenttoolkit/Deployment/wiki"/>
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/deploymenttoolkit/Deployment/releases"/>
     <ROW Property="Manufacturer" Value="DeploymentToolkit Team"/>
-    <ROW Property="ProductCode" Value="2057:{6EA2762F-3A4B-4E09-9E1B-4FBE83801CBE} " Type="16"/>
+    <ROW Property="ProductCode" Value="2057:{DF04E64E-EBA5-43C3-8E33-06DBECF32029} " Type="16"/>
     <ROW Property="ProductLanguage" Value="2057"/>
     <ROW Property="ProductName" Value="DeploymentToolkit"/>
-    <ROW Property="ProductVersion" Value="1.0.7110.29724" Type="32" TargetFile="DeploymentToolkit.Deployment.exe"/>
+    <ROW Property="ProductVersion" Value="1.0.7110.35407" Type="32" TargetFile="DeploymentToolkit.Deployment.exe"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{0A9621FB-8122-4AA0-AC8E-CA2224B3A487}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -161,6 +161,7 @@
     <ROW File="log.Tray.config" Component_="Blocker.config" FileName="LOGTRA~1.CON|log.Tray.config" Attributes="0" SourcePath="..\Source\Config\log.Tray.config" SelfReg="false"/>
     <ROW File="log.Unblocker.config" Component_="Blocker.config" FileName="LOGUNB~1.CON|log.Unblocker.config" Attributes="0" SourcePath="..\Source\Config\log.Unblocker.config" SelfReg="false"/>
     <ROW File="Tray.ico" Component_="DeploymentToolkit.Deployment.exe.config" FileName="Tray.ico" Attributes="0" SourcePath="..\Source\Tray.ico" SelfReg="false"/>
+    <ROW File="log.Deployment.config" Component_="Blocker.config" FileName="LOGDEP~1.CON|log.Deployment.config" Attributes="0" SourcePath="..\Source\Config\log.Deployment.config" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
@@ -291,8 +292,8 @@
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
     <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
     <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
-    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
-    <ROW Action="AI_EnableDebugLog" Sequence="52"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="54"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="53"/>
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
     <ROW Action="AI_AppSearchEx" Sequence="102"/>
     <ROW Action="AI_ResolveLocalizedCredentials" Sequence="51"/>
