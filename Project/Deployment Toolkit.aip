@@ -17,10 +17,10 @@
     <ROW Property="ARPURLINFOABOUT" Value="https://github.com/deploymenttoolkit/Deployment/wiki"/>
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/deploymenttoolkit/Deployment/releases"/>
     <ROW Property="Manufacturer" Value="DeploymentToolkit Team"/>
-    <ROW Property="ProductCode" Value="2057:{BA0C2197-2BA7-491F-B416-06B305E9F941} " Type="16"/>
+    <ROW Property="ProductCode" Value="2057:{02CDFBFD-2EA0-4D02-8C2D-15F85A0C71AB} " Type="16"/>
     <ROW Property="ProductLanguage" Value="2057"/>
     <ROW Property="ProductName" Value="DeploymentToolkit"/>
-    <ROW Property="ProductVersion" Value="1.0.7110.28080" Type="32" TargetFile="DeploymentToolkit.Deployment.exe"/>
+    <ROW Property="ProductVersion" Value="1.0.7110.29283" Type="32" TargetFile="DeploymentToolkit.Deployment.exe"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{0A9621FB-8122-4AA0-AC8E-CA2224B3A487}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -152,6 +152,11 @@
     <ROW File="DeploymentToolkit.Actions.pdb" Component_="DeploymentToolkit.Actions.dll" FileName="DEPLO~21.PDB|DeploymentToolkit.Actions.pdb" Attributes="0" SourcePath="..\Source\DeploymentToolkit.Actions.pdb" SelfReg="false"/>
     <ROW File="DeploymentToolkit.Blocker.exe" Component_="DeploymentToolkit.Blocker.pdb" FileName="DEPLOY~6.EXE|DeploymentToolkit.Blocker.exe" Attributes="0" SourcePath="..\Source\DeploymentToolkit.Blocker.exe" SelfReg="false" DigSign="true"/>
     <ROW File="DeploymentToolkit.Blocker.exe.config" Component_="DeploymentToolkit.Deployment.exe.config" FileName="DEPLOY~5.CON|DeploymentToolkit.Blocker.exe.config" Attributes="0" SourcePath="..\Source\DeploymentToolkit.Blocker.exe.config" SelfReg="false"/>
+    <ROW File="log.Blocker.config" Component_="Blocker.config" FileName="LOGBLO~1.CON|log.Blocker.config" Attributes="0" SourcePath="..\Source\Config\log.Blocker.config" SelfReg="false"/>
+    <ROW File="log.Restart.config" Component_="Blocker.config" FileName="LOGRES~1.CON|log.Restart.config" Attributes="0" SourcePath="..\Source\Config\log.Restart.config" SelfReg="false"/>
+    <ROW File="log.Tray.config" Component_="Blocker.config" FileName="LOGTRA~1.CON|log.Tray.config" Attributes="0" SourcePath="..\Source\Config\log.Tray.config" SelfReg="false"/>
+    <ROW File="log.Unblocker.config" Component_="Blocker.config" FileName="LOGUNB~1.CON|log.Unblocker.config" Attributes="0" SourcePath="..\Source\Config\log.Unblocker.config" SelfReg="false"/>
+    <ROW File="Tray.ico" Component_="DeploymentToolkit.Deployment.exe.config" FileName="Tray.ico" Attributes="0" SourcePath="..\Source\Tray.ico" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
